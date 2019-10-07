@@ -1,0 +1,61 @@
+<html> 
+ <head>
+    <title></title> 
+</head>
+ <body>
+    <p align="center"> 
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body> 
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+ <script>
+var sketchProc = function(processingInstance) {
+with (processingInstance) {
+//START
+size(400, 400); 
+frameRate(1);
+noStroke();
+background(255,255,255);
+
+var Circle = function(x,y) {
+    this.x = x;
+    this.y = y;
+    this.draw = function() {
+        var p = floor(random(0,255));
+        var o = floor(random(0,255));
+        var i = floor(random(0,255));
+        fill(p,o,i);
+        ellipse(this.x, this.y, 20, 20);
+    };
+    this.move = function(){
+        this.x = floor(random(0,400));
+        this.y = floor(random(0,400));
+    };
+};
+
+
+var circles = [];
+var num_circles = 7;
+
+for (var i = 0; i < num_circles; i++) {
+    circles.push(new Circle());
+}
+
+draw = function() {
+    background(255, 255, 255);
+    for (var i = 0; i < num_circles; i++) {
+        circles[i].move();
+        circles[i].draw();
+    }
+};
+
+
+//END
+}
+};
+
+var canvas = document.getElementById("mycanvas"); 
+var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
+</html>
